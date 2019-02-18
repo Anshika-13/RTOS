@@ -24,19 +24,19 @@ int main() {
     message.mesg_type = 1;
     message.cl = msgid2;
 
-    // while (1) {
-    //     printf("Client: %d\n", message.cl);
-    //     printf("Give file name: %s", name);
-    //     scanf(" %[^\n]",name);
+    while (1) {
+        printf("Client: %d\n", message.cl);
+        printf("Give file name: %s", name);
+        scanf(" %[^\n]",name);
 
-        // char get[5] = "GET ";
-        // strcat(get, name);
-        char get[8] = "GET two";
+        char get[5] = "GET ";
+        strcat(get, name);
+        // char get[8] = "GET two";
         strcpy(message.mesg_text, get);
-        // printf("name: %s\n", get);
+        printf("name: %s\n", get);
         long s=0, m=0;
 
-        for (int i = 0; i<n; i++) {
+        // for (int i = 0; i<n; i++) {
             struct timeval end, start;
             // msgsnd to send message 
             msgsnd(msgid, &message, sizeof(message), 0); 
@@ -55,9 +55,9 @@ int main() {
 
             s = s+ seconds;
             m = m+ micros;
-        }
-        printf("Total time B = %lu seconds and %lu micros\n", s, m);
-        printf("Average time B = %lu seconds and %lu micros\n", s/n, m/n);
+        // }
+        // printf("Total time B = %lu seconds and %lu micros\n", s, m);
+        // printf("Average time B = %lu seconds and %lu micros\n", s/n, m/n);
 
 
         //emptying the character buffers
@@ -65,7 +65,7 @@ int main() {
         memset(message2.mesg_text, 0, sizeof(message2.mesg_text));
         memset(name, 0, sizeof(name));
 
-    // }
+    }
 
   
 } 
