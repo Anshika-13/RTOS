@@ -8,7 +8,7 @@ gcc CliA.c -o CliA<br />
 ./SERV2<br />
 ./CliA<br />
 
-2. To measure the performance data, edit the Client files and send a character 10 times to the server instead of asking the user for an input. Then, measure the time taken by the server to respond to each request and average it out. (The lines required for this have been included as comments in my code. Do comment as required.)<br />
+2. To measure the performance data, edit the Client files and send a file name 10 times to the server instead of asking the user for an input. Then, measure the time taken by the server to respond to each request and average it out. (The lines required for this have been included as comments in my code. Do comment as required.)<br />
 Then, execute the server, then execute one or more clients simultaneously, like, <br />
 gcc SERV2.c -o SERV2<br />
 gcc CliA.c -o CliA<br />
