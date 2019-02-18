@@ -32,4 +32,4 @@ Number of Clients | Client A (microseconds) | Client B (microseconds) | Client C
 4 | 92 | 173 | 137 | 146 | .
 5 | 126 | 185 | 138 | 182 | 166
 
-While these are the average values, I observed that some requests were served very fast (in around 8 to 14 us), and a few were serviced very slow (>100 us). I also observed that as the number of simultaneous clients increased, the average value also increased, from most requests being serviced in around 10-20us for one client, to around 80-120us for five clients.
+While these are the average values, I observed that some requests were served faster than the others (in around 40 to 60 us), and a few were serviced very slow (>200 us). I also observed that as the number of simultaneous clients increased, the average value also increased, from most requests being serviced in around 40-60us for one client, to around 130-180us for five clients.
