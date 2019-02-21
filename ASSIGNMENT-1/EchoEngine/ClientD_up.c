@@ -22,7 +22,7 @@ int main()
     msgid = msgget(1000, 0666 | IPC_CREAT); //client will use this to send
     msgid2 = msgget(1014, 0666 | IPC_CREAT); //server will use this to send
     message.mesg_type = 1; 
-    message.cl = 4; 
+    message.cl = msgid2; 
 
     while(1) {
         printf("Give a character : "); 
