@@ -41,16 +41,14 @@ int main(int argc, char const *argv[])
 		return -1; 
 	} 
 
-	int n = 10;
-
-	// while (1) {
-		char *hello = "a";
-		// char *hello;
-		// printf("Give a character : "); 
-		// fgets(hello, sizeof(hello), stdin);
+	while (1) {
+		// char *hello = "a";
+		char *hello;
+		printf("Give a character : "); 
+		fgets(hello, sizeof(hello), stdin);
 		long s=0, m=0;
         
-        for (int i = 0; i<n; i++) {
+        // for (int i = 0; i<n; i++) {
             struct timeval end, start;
             // msgsnd to send message 
 		    // printf("Character given is : %s", hello);
@@ -76,12 +74,12 @@ int main(int argc, char const *argv[])
 
             s = s+ seconds;
             m = m+ micros;
-        }
-        printf("Total time A = %lu seconds and %lu micros\n", s, m);
-printf("Average time A = %lu seconds and %lu micros\n", s/n, m/n);
+        // }
+        // printf("Total time A = %lu seconds and %lu micros\n", s, m);
+// printf("Average time A = %lu seconds and %lu micros\n", s/n, m/n);
 
 
-	// }
+	}
 
 
 	return 0; 
