@@ -5,14 +5,14 @@
 #include <stdlib.h> 
 #include <netinet/in.h> 
 #include <string.h> 
-#define PORT 8000
+#define PORT 6000
 int main(int argc, char const *argv[]) 
 { 
 	int server_fd, new_socket, valread; 
 	struct sockaddr_in address; 
 	int opt = 1; 
 	int addrlen = sizeof(address); 
-	char buffer[1024] = {0}; 
+	// char buffer[1024] = {0}; 
 	// char *buffer = "Hello from server";
 	char *hello; 
 	
@@ -46,40 +46,46 @@ int main(int argc, char const *argv[])
 		perror("listen"); 
 		exit(EXIT_FAILURE); 
 	} 
-	if ((new_socket = accept(server_fd, (struct sockaddr *)&address, 
-					(socklen_t*)&addrlen))<0) 
-	{ 
-		perror("accept"); 
-		exit(EXIT_FAILURE); 
-	}
-	// printf("stuff\n");
 
-	if (fork() ==0) {
-		while (1) {
-			valread = read( new_socket , buffer, 1024); 
-			// printf("%d\n",valread );  //0
-		        // display the message 
-			printf("Character Received is : %s", buffer);
-			if (*(buffer) >= 65 && *(buffer) <=90) {
-		        printf("U\n");
-		        *(buffer) = *(buffer) + 32;
-		    }
-		    else if (*(buffer) >= 97 && *(buffer) <= 122) {
-		        printf("L\n");
-		            // *(mq2.mesg_text) = tolower( *(mq1.mesg_text) );
-		        *(buffer) = *(buffer) - 32;
-		    }
-		    else {
-		        *(buffer) = *(buffer) ;
-		    }
-		       
-			printf("Character sent is : %s \n\n", buffer);
-			send(new_socket , buffer , strlen(buffer) , 0 ); 
-			// printf("Hello message sent\n"); 
+	while(1) {
+		if ((new_socket = accept(server_fd, (struct sockaddr *)&address, 
+						(socklen_t*)&addrlen))>=0) 
+		{ 
+			// 	perror("accept"); 
+			// 	exit(EXIT_FAILURE); 
+			// }
+			// // printf("stuff\n");
+
+			if (fork() ==0) {
+				while (1) {
+					char buffer[1024] = {0}; 
+					valread = read( new_socket , buffer, 1024); 
+					// printf("%d\n",valread );  //0
+				        // display the message 
+					printf("Character Received is : %s", buffer);
+					if (*(buffer) >= 65 && *(buffer) <=90) {
+				        printf("U\n");
+				        *(buffer) = *(buffer) + 32;
+				    }
+				    else if (*(buffer) >= 97 && *(buffer) <= 122) {
+				        printf("L\n");
+				            // *(mq2.mesg_text) = tolower( *(mq1.mesg_text) );
+				        *(buffer) = *(buffer) - 32;
+				    }
+				    else {
+				        *(buffer) = *(buffer) ;
+				    }
+				       
+					printf("Character sent is : %s \n\n", buffer);
+					// send(new_socket , buffer , strlen(buffer) , 0 ); 
+					send(new_socket , buffer , 2 , 0 ); 
+					// printf("Hello message sent\n"); 
+				}
+			}
 		}
 	}
 
 
-	close(server_fd);
+	// close(server_fd);
 	return 0; 
 } 
