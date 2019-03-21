@@ -9,14 +9,14 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <fcntl.h>
-#define PORT 8000
+#define PORT 6000
 int main(int argc, char const *argv[]) 
 { 
 	int server_fd, new_socket, valread; 
 	struct sockaddr_in address; 
 	int opt = 1; 
 	int addrlen = sizeof(address); 
-	char buffer[1024] = {0}; 
+	// char buffer[1024] = {0}; 
 	// char *buffer = "Hello from server";
 	char *hello; 
 	char content[100];
@@ -51,43 +51,54 @@ int main(int argc, char const *argv[])
 		perror("listen"); 
 		exit(EXIT_FAILURE); 
 	} 
-	if ((new_socket = accept(server_fd, (struct sockaddr *)&address, 
-					(socklen_t*)&addrlen))<0) 
-	{ 
-		perror("accept"); 
-		exit(EXIT_FAILURE); 
-	}
-	// printf("stuff\n");
 
-	if (fork() ==0) {
-		while (1) {
-			valread = read( new_socket , buffer, 1024); 
-			// printf("%d\n",valread );  //0
-		        // display the message 
-			printf("Text Received is : %s\n", buffer);
-			char *name = buffer +4;
-			printf("Name of file: %s\n", name);
-		    int fd = open(name, O_RDONLY);
 
-		    if (fd==-1) {
-		    	printf("File not found\n");
-				strcat(buffer,"Data not found.");
-		    }
-		    else { 
-		    	read (fd, &content, 100);
-		    	strcpy(buffer, content);
-		    	close(fd);
-		    }
+	while(1) {
+		if ((new_socket = accept(server_fd, (struct sockaddr *)&address, 
+						(socklen_t*)&addrlen))>=0) 
+		{ 
+			// 	perror("accept"); 
+			// 	exit(EXIT_FAILURE); 
+			// }
+			// // printf("stuff\n");
 
-			printf("File content sent : %s \n", buffer); 
-		       
-			// printf("Character sent is : %s \n\n", buffer);
-			send(new_socket , buffer , strlen(buffer) , 0 ); 
-			// printf("Hello message sent\n"); 
+			if (fork() ==0) {
+				while (1) {
+					char buffer[1024] = {0}; 
+					valread = read( new_socket , buffer, 1024); 
+					// printf("%d\n",valread );  //0
+				        // display the message 
+					printf("Text Received is : %s\n", buffer);
+					char *name = buffer +4;
+					printf("Name of file: %s\n", name);
+				    int fd = open(name, O_RDONLY);
+
+				    if (fd==-1) {
+				    	printf("File not found\n");
+						strcat(buffer,"Data not found.");
+				    }
+				    else { 
+				    	read (fd, &content, 100);
+				    	strcpy(buffer, content);
+						printf("File content sent : %s \n", buffer); 
+					       
+						// printf("Character sent is : %s \n\n", buffer);
+						// send(new_socket , buffer , strlen(buffer) , 0 );
+						send(new_socket , buffer , 6 , 0 );
+				    	// close(fd);
+				    }
+
+					// printf("File content sent : %s \n", buffer); 
+				       
+					// // printf("Character sent is : %s \n\n", buffer);
+					// send(new_socket , buffer , strlen(buffer) , 0 ); 
+					// printf("Hello message sent\n"); 
+				}
+			}
 		}
 	}
 
 
-	close(server_fd);
+	// close(server_fd);
 	return 0; 
 } 
