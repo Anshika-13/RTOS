@@ -7,7 +7,7 @@
 #include <unistd.h>
 #include <arpa/inet.h> 
 #include <sys/time.h>
-#define PORT 8000
+#define PORT 6000
 
 int main(int argc, char const *argv[]) 
 { 
@@ -15,8 +15,8 @@ int main(int argc, char const *argv[])
 	int sock = 0, valread; 
 	struct sockaddr_in serv_addr; 
 	// char *hello = "Hello from client"; 
-	char *hello;
-	char buffer[1024] = {0}; 
+	// char *hello;
+	// char buffer[1024] = {0}; 
 	if ((sock = socket(AF_INET, SOCK_STREAM, 0)) < 0) 
 	{ 
 		printf("\n Socket creation error \n"); 
@@ -41,12 +41,16 @@ int main(int argc, char const *argv[])
 		return -1; 
 	} 
 
-	while (1) {
-		printf("Give a character : "); 
-		fgets(hello, sizeof(hello), stdin);
+	int n = 10;
+
+	// while (1) {
+		char *hello = "a";
+		// char *hello;
+		// printf("Give a character : "); 
+		// fgets(hello, sizeof(hello), stdin);
 		long s=0, m=0;
         
-        // for (int i = 0; i<n; i++) {
+        for (int i = 0; i<n; i++) {
             struct timeval end, start;
             // msgsnd to send message 
 		    // printf("Character given is : %s", hello);
@@ -55,6 +59,8 @@ int main(int argc, char const *argv[])
 			// printf("%ld\n", send(sock , hello , strlen(hello) , 0 ));
 		    printf("Character sent is : %s", hello);
 			// printf("Hello message sent\n"); 
+
+			char buffer[1024] = {0}; 
 			gettimeofday(&start, NULL); // Store time as soon as message sent
             valread = read( sock , buffer, 1024); 
             gettimeofday(&end, NULL);
@@ -70,12 +76,12 @@ int main(int argc, char const *argv[])
 
             s = s+ seconds;
             m = m+ micros;
-        // }
-        // printf("Total time A = %lu seconds and %lu micros\n", s, m);
-// printf("Average time A = %lu seconds and %lu micros\n", s/n, m/n);
+        }
+        printf("Total time A = %lu seconds and %lu micros\n", s, m);
+printf("Average time A = %lu seconds and %lu micros\n", s/n, m/n);
 
 
-	}
+	// }
 
 
 	return 0; 
