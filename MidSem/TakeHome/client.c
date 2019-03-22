@@ -14,8 +14,6 @@ int main(int argc, char const *argv[])
 	struct sockaddr_in address; 
 	int sock = 0, valread; 
 	struct sockaddr_in serv_addr; 
-	// char hello[100];
-	// char buffer[1024] = {0}; 
 	if ((sock = socket(AF_INET, SOCK_STREAM, 0)) < 0) 
 	{ 
 		printf("\n Socket creation error \n"); 
@@ -59,7 +57,6 @@ int main(int argc, char const *argv[])
 		char buff[1024] = {0}; 
         valread = read( sock , buffer, 1024); 
 	   	fp = fopen("csvfile.csv","a");
-	   	// printf("%lu\n", start.tv_usec);
 		sprintf(buff,"%lu, %s",start.tv_sec,buffer);
 
 	   	printf("Data received from server/sensor:%s\n",buff);
