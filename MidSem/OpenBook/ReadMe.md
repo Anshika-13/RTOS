@@ -14,7 +14,7 @@ gcc Client.c -o Client <br />
 ### Performance Data
 
 Following is the data from the csv file:
-'''
+```
 TimeStamp, Temperature, Humidity,  Gas1,  Gas2,  Gas3
 41227, 90, 83, 1087, 2209, 2465
 41708, 84, 61, 1900, 2970, 2664
@@ -35,4 +35,4 @@ TimeStamp, Temperature, Humidity,  Gas1,  Gas2,  Gas3
 47830, 78, 51, 1500, 2370, 2246
 48222, 99, 64, 1490, 2390, 2935
 48823, 90, 81, 1586, 1872, 2046
-'''
+```
