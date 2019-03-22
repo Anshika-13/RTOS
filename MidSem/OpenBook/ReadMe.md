@@ -6,8 +6,6 @@
 gcc coroutine.c -lpthread <br />
 ./coroutine <br />
 
-2. The output csv file will be saved in the same folder as the client.c file. <br />
-
 ### Performance Data
 
 Following are the values of time taken for various rounds of the game:
