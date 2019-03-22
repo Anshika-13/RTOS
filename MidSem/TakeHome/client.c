@@ -60,7 +60,7 @@ int main(int argc, char const *argv[])
         valread = read( sock , buffer, 1024); 
 	   	fp = fopen("csvfile.csv","a");
 	   	// printf("%lu\n", start.tv_usec);
-		sprintf(buff,"%lu, %s",start.tv_usec,buffer);
+		sprintf(buff,"%lu, %s",start.tv_sec,buffer);
 
 	   	printf("Data received from server/sensor:%s\n",buff);
 	   	fprintf(fp,"%s\n",buff);
