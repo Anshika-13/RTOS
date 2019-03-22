@@ -17,7 +17,6 @@ int main(int argc, char const *argv[])
 	struct sockaddr_in address; 
 	int opt = 1; 
 	int addrlen = sizeof(address); 
-	// char buffer[1024] = {0}; 
 	// char *buffer = "Hello from server";
 	char *hello; 
 	char content[100];
@@ -58,10 +57,6 @@ int main(int argc, char const *argv[])
 		if ((new_socket = accept(server_fd, (struct sockaddr *)&address, 
 						(socklen_t*)&addrlen))>=0) 
 		{ 
-			// 	perror("accept"); 
-			// 	exit(EXIT_FAILURE); 
-			// }
-			// // printf("stuff\n");
 
 			if (fork() ==0) {
 				while (1) {
@@ -69,7 +64,6 @@ int main(int argc, char const *argv[])
 					struct timeval end, start;
 					char temperature[5], humidity[5], gas1[5], gas2[5], gas3[5];
 					char buffer[1024] = {0}; 
-					// char content[100];
 
 			    	gettimeofday(&start, NULL);
 					valread = read( new_socket , buffer, 1024); 
@@ -96,8 +90,7 @@ int main(int argc, char const *argv[])
 			      		fscanf(fp, "%s", gas3);
 			      		fclose(fp);
 
-			      		// sprintf(buffer,"%lu, %s, %s, %s, %s, %s",start.tv_usec,temperature,humidity,gas1,gas2,gas3);
-						sprintf(buffer, "%s, %s, %s, %s, %s",temperature,humidity,gas1,gas2,gas3);
+			      			sprintf(buffer, "%s, %s, %s, %s, %s",temperature,humidity,gas1,gas2,gas3);
 
 			      		send(new_socket , buffer , strlen(buffer) , 0 );
 				 		printf("\nData sent to client: %s", buffer);
@@ -108,6 +101,5 @@ int main(int argc, char const *argv[])
 	}
 
 
-	// close(server_fd);
 	return 0; 
 } 
